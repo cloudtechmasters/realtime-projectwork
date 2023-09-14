@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-ingress
+  namespace: kube-system  # Change to the namespace where the Dashboard is installed
+spec:
+  rules:
+    - host: your-dashboard-domain.com  # Change to your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kubernetes-dashboard
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - your-dashboard-domain.com  # Change to your domain
+      secretName: your-secret-name
